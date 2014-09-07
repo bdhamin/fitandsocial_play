@@ -1,0 +1,20 @@
+@(activityInformation: Form[ActivityInformation], activityLocation: Form[ActivityLocation])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Welcome to Play 2.0") {
+
+    @form(routes.ActivityController.create()){
+        @inputText(activityInformation("title"), '_label -> "Title", 'style -> "width: 712px;", 'maxLength -> "150")
+        @inputText(activityInformation("type"), '_label -> "Type", 'style -> "width: 712px;", 'maxLength -> "150")
+        @inputText(activityInformation("duration"), '_label -> "Duration", 'style -> "width: 712px;", 'maxLength -> "150")
+        @inputText(activityInformation("distance"), '_label -> "Distance", 'style -> "width: 712px;", 'maxLength -> "20")
+        @inputText(activityLocation("startLocationLatitude"), '_label -> "Start location lat", 'style -> "width: 712px;", 'maxLength -> "50")
+        @inputText(activityLocation("startLocationMagnitude"), '_label -> "End location mag", 'style -> "width: 712px;", 'maxLength -> "50")
+        @inputText(activityLocation("endLocationLatitude"), '_label -> "End location lat", 'style -> "width: 712px;", 'maxLength -> "150")
+        @inputText(activityLocation("endLocationMagnitude"), '_label -> "End location mag", 'style -> "width: 712px;", 'maxLength -> "250")
+
+        <input type="submit" value="Create" class="btn btn-primary">
+    }
+
+}
