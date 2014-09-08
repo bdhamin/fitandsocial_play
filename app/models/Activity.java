@@ -21,7 +21,7 @@ public class Activity{
     private ActivityInformation activityInformation;
     @OneToOne(cascade = CascadeType.ALL)
     private ActivityLocation activityLocation;
-    @ManyToMany(mappedBy="activities")
+    @ManyToMany(mappedBy="activities", cascade = CascadeType.REMOVE)
     private List<ActivityParticipant> activityParticipants;
     private String activityStatus;
     @ManyToOne

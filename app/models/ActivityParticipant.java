@@ -15,7 +15,7 @@ public class ActivityParticipant{
     private Long id;
     @ManyToOne
     private Users user;
-    @ManyToMany(cascade=CascadeType.ALL)
+    @ManyToMany(cascade=CascadeType.MERGE)
     @JoinTable(name="ACTIVITY_PARTICIPANTS", joinColumns={@JoinColumn(referencedColumnName="ID")}
             , inverseJoinColumns={@JoinColumn(referencedColumnName="ID")})
     private List<Activity> activities;

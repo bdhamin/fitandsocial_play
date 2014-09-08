@@ -23,7 +23,7 @@ public class Users{
     private PersonalInformation personalInformation;
     @OneToMany
     private List<UserNotification> userNotification;
-    @ManyToMany
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.REMOVE)
     private List<GeneralNotification> generalNotifications;
     @OneToMany
     private List<Activity> activities;

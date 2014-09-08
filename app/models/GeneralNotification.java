@@ -14,7 +14,9 @@ public class GeneralNotification{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "USER_GENERAL_NOTIFICATION", joinColumns = {@JoinColumn (referencedColumnName = "ID")}
+    , inverseJoinColumns = {@JoinColumn(referencedColumnName = "ID")})
     private List<Users> users;
     private String title;
     private String message;

@@ -48,7 +48,7 @@ public class ActivityController {
         ActivityInformation activityInformation = filledActivityInformation.get();
         ActivityLocation activityLocation = filledActivityLocation.get();
         List<ActivityParticipant> activityParticipantList = new ArrayList<>();
-        Users user = usersService.getById(77L);
+        Users user = usersService.getById(123L);
         if(user != null){
 
             activity.setUser(user);
@@ -58,16 +58,16 @@ public class ActivityController {
             activity.setActivityLocation(activityLocation);
             activityService.persist(activity);
 
-            List<Activity> activityList = activityService.getAll();
-            activityParticipant.setUser(user);
-            activityParticipant.setActivities(activityList);
-            activityParticipantList.add(activityParticipant);
-            activity.setActivityParticipants(activityParticipantList);
+//            List<Activity> activityList = activityService.getAll();
+//            activityParticipant.setUser(user);
+//            activityParticipant.setActivities(activityList);
+//            activityParticipantList.add(activityParticipant);
+//            activity.setActivityParticipants(activityParticipantList);
 
 //            List<Activity> activityList = activityService.getAll();
 //            activityParticipant.setUser(user);
 //            activityParticipant.setActivities(activityList);
-            activityService.persist(activity);
+//            activityService.persist(activity);
         }
 
         return play.mvc.Controller.ok();
