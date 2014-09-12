@@ -1,0 +1,32 @@
+@(activityList: List[Activity])<?xml version="1.0" encoding="utf-8"?>
+
+<activities>@for(activity <- activityList){
+    <activity>
+        <id>@activity.getId()</id>
+        <title>@activity.getActivityInformation().getTitle()</title>
+        <type>@activity.getActivityInformation().getType()</type>
+        <distance>@activity.getActivityInformation().getDistance() KM</distance>
+        <duration>@activity.getActivityInformation().getDuration() Min</duration>
+        <date>@activity.getActivityInformation().getActivityDateString()</date>
+        <time>@activity.getActivityInformation().getActivityTimeString()</time>
+        <members_total>5</members_total>
+        <members>
+            <member>
+                <id>52</id>
+                <name>Hardcore</name>
+                <pictureURL>some_url</pictureURL>
+            </member>
+            <member>
+                <id>52</id>
+                <name>Hardcore 2</name>
+                <pictureURL>some_url</pictureURL>
+            </member>
+            <member>
+                <id>52</id>
+                <name>Hardcore 3</name>
+                <pictureURL>some_url</pictureURL>
+            </member>
+        </members>
+    </activity>
+  }
+</activities>

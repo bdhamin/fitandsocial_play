@@ -1,0 +1,69 @@
+@(activityList: List[Activity])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Welcome to Play 2.0") {
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Activity owner
+                </th>
+                <th>
+                    Creation date
+                </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Duration
+                </th>
+                <th>
+                    Distance
+                </th>
+                <th>
+                    Activity Date
+                </th>
+                <th>
+                    Activity Time
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(activities <- activityList){
+                <tr>
+                    <td>
+                        @activities.getUser().getUserInformation().getNickname()
+                    </td>
+                    <td>
+                         @activities.getCreationDate()
+                    </td>
+                    <td>
+                         @activities.getActivityInformation().getTitle()
+                    </td>
+                    <td>
+                         @activities.getActivityInformation().getType()
+                    </td>
+                    <td>
+                         @activities.getActivityInformation().getDuration
+                    </td>
+                    <td>
+                        @activities.getActivityInformation().getDistance()
+                    </td>
+                    <td>
+                        @activities.getActivityInformation().getActivityDateString()
+                    </td>
+                    <td>
+                        @activities.getActivityInformation().getActivityTimeString()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
