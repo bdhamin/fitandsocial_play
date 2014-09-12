@@ -12,8 +12,11 @@ POST        /users               @controllers.UsersController.save
 
 GET         /activity            @controllers.ActivityController.index
 POST        /activity            @controllers.ActivityController.create
+GET         /activity/show       @controllers.ActivityController.show
+GET         /xml                 @controllers.ActivityController.testXML
 
-GET        /participate        @controllers.ParticipantController.addParticipant
+
+GET         /participate         @controllers.ParticipantController.addParticipant
 
 
 # Map static resources from the /public folder to the /assets URL path

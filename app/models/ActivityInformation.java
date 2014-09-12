@@ -2,7 +2,11 @@ package models;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+
 import javax.persistence.*;
+
+import utils.*;
+import utils.DateFormat;
 
 /**
  * Created by mint on 1-9-14.
@@ -17,12 +21,20 @@ public class ActivityInformation{
     private String type;
     private int duration;
     private int distance;
+    @Transient
+    private String activityDateString;
     @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+    @DateFormat("dd-MM-yyyy")
     private DateTime activityDate;
+    @Transient
+    private String activityTimeString;
+    @TimeFormat("HH:mm")
     private long activityTime;
     @OneToOne(mappedBy = "activityInformation")
     private Activity activity;
 
+    public ActivityInformation(){
+    }
 
     public Long getId() {
         return id;
@@ -31,6 +43,7 @@ public class ActivityInformation{
     public void setId(Long id) {
         this.id = id;
     }
+
 
     public String getTitle() {
         return title;
@@ -65,14 +78,27 @@ public class ActivityInformation{
     }
 
     public DateTime getActivityDate() {
+
         return activityDate;
     }
 
+    public void setActivityDateString(String activityDateString){
+        this.activityDateString = activityDateString;
+    }
+
+
+    public String getActivityDateString(){
+
+        return DateAndTimePrintFormatter.dateTimePrintFormatter(this.getActivityDate());
+    }
+
     public void setActivityDate(DateTime activityDate) {
+
         this.activityDate = activityDate;
     }
 
     public long getActivityTime() {
+
         return activityTime;
     }
 
@@ -87,4 +113,10 @@ public class ActivityInformation{
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
+
+    public String getActivityTimeString() {
+        activityTimeString = DateAndTimePrintFormatter.timePrintFormatter(this.getActivityTime());
+        return activityTimeString;
+    }
+
 }
