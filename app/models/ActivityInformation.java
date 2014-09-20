@@ -23,9 +23,11 @@ public class ActivityInformation{
     private int distance;
     @Transient
     private String activityDateString;
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+//    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
+//    @DateFormat("dd-MM-yyyy")
+//    private DateTime activityDate;
     @DateFormat("dd-MM-yyyy")
-    private DateTime activityDate;
+    long activityDate;
     @Transient
     private String activityTimeString;
     @TimeFormat("HH:mm")
@@ -77,7 +79,7 @@ public class ActivityInformation{
         this.distance = distance;
     }
 
-    public DateTime getActivityDate() {
+    public long getActivityDate() {
 
         return activityDate;
     }
@@ -92,7 +94,7 @@ public class ActivityInformation{
         return DateAndTimePrintFormatter.dateTimePrintFormatter(this.getActivityDate());
     }
 
-    public void setActivityDate(DateTime activityDate) {
+    public void setActivityDate(long activityDate) {
 
         this.activityDate = activityDate;
     }

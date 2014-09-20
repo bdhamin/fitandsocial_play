@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Form.Display(name = "format.date", attributes = {"value"})
+//@Form.Display(name = "format.date", attributes = {"value"})
 public @interface DateFormat {
     String value();
 }

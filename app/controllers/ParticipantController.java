@@ -31,15 +31,15 @@ public class ParticipantController {
 
         List<Activity> activities = new ArrayList<>();
 
-        Users user = usersService.getById(105L);
+        Users user = usersService.getById(231L);
 
-        Activity activity1 = activityService.getById(80L);
-        Activity activity2 = activityService.getById(85L);
-        Activity activity3 = activityService.getById(132L);
+        Activity activity1 = activityService.getById(237L);
+        Activity activity2 = activityService.getById(240L);
+//        Activity activity3 = activityService.getById(132L);
 
         activities.add(activity1);
         activities.add(activity2);
-        activities.add(activity3);
+//        activities.add(activity3);
 
 
         ActivityParticipant activityParticipant = new ActivityParticipant();

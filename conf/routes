@@ -3,21 +3,22 @@
 # ~~~~
 
 # Home page
-GET         /                    @controllers.Application.index
-GET         /bars                @controllers.Application.listRegistration
-POST        /bars                @controllers.Application.addRegistration
+GET         /                       @controllers.Application.index
+GET         /bars                   @controllers.Application.listRegistration
+POST        /bars                    @controllers.Application.addRegistration
 
-GET         /users               @controllers.UsersController.index
-POST        /users               @controllers.UsersController.save
+GET         /users                  @controllers.UsersController.index
+POST        /users                  @controllers.UsersController.save
 
-GET         /activity            @controllers.ActivityController.index
-POST        /activity            @controllers.ActivityController.create
-GET         /activity/show       @controllers.ActivityController.show
-GET         /xml                 @controllers.ActivityController.testXML
+GET         /activity               @controllers.ActivityController.index
+POST        /activity               @controllers.ActivityController.create
+GET         /activity/show          @controllers.ActivityController.show
 
-
-GET         /participate         @controllers.ParticipantController.addParticipant
-
-
+GET         /participate                  @controllers.ParticipantController.addParticipant
+GET         /allActivities                @controllers.api.UserApiController.getAllActivities
+GET         /userActivitiesSummary/:id    @controllers.api.UserApiController.getUserActivitiesSummary(id: Long)
+GET         /searchActivities             @controllers.api.SearchController.search(activityType: String, distance: Integer, durationMin: Integer, durationMax: Integer,  radiusMin: Integer, radiusMax: Integer, startDate: String, time: String)
+POST         /participateRequest                  @controllers.api.ApiActivityController.getDataFromUrl()
+POST        /createActivity             @controllers.api.ApiActivityController.createActivityFromJson
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file        controllers.Assets.at(path="/public", file)

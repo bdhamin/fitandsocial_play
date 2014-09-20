@@ -39,7 +39,7 @@ public class ActivityController {
         Activity activity = new Activity();
         ActivityInformation activityInformation = filledActivityInformation.get();
         ActivityLocation activityLocation = filledActivityLocation.get();
-        Users user = usersService.getById(184L);
+        Users user = usersService.getById(222L);
         if(user != null){
             activity.setUser(user);
             activityInformation.setActivity(activity);
@@ -56,9 +56,13 @@ public class ActivityController {
         return play.mvc.Controller.ok(views.html.activity.activities.render(activities));
     }
 
-    @BodyParser.Of(BodyParser.Xml.class)
-    public Result testXML(){
-        List<Activity> activities =  activityService.getAll();
-        return play.mvc.Controller.ok(views.xml.activity.activityxml.render(activities));
-    }
+
+
+
+
+
+
+
+
+
 }

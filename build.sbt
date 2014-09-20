@@ -18,7 +18,8 @@ libraryDependencies ++= Seq(
   "org.jadira.usertype" % "usertype.core" % "3.1.0.CR1",
   "org.hibernate" % "hibernate-core" % "3.6.8.Final",
   "org.hibernate" % "hibernate-annotations" % "3.5.6-Final",
-  "postgresql" % "postgresql" % "9.1-901-1.jdbc4"
+  "postgresql" % "postgresql" % "9.1-901-1.jdbc4",
+  "com.google.code.gson" % "gson" % "2.2.4"
 )
 
 play.Project.playJavaSettings

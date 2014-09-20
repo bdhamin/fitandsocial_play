@@ -14,7 +14,7 @@ public class Global extends GlobalSettings {
     @Override
     public void onStart(Application app) {
         ctx = new ClassPathXmlApplicationContext("components.xml");
-        Formatters.register(DateTime.class, new AnnotationDateFormatter());
+        Formatters.register(Long.class, new AnnotationDateFormatter());
         Formatters.register(Long.class, new AnnotationTimeFormatter());
     }
 
