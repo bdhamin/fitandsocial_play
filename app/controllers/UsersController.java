@@ -37,14 +37,14 @@ public class UsersController {
     private static final Form<ActivityType> activityTypeForm = Form.form(ActivityType.class);
 
     public Result index(){
-        return play.mvc.Controller.ok(views.html.users.index.render(personalInformationForm, generalUserInformationForm, activityTypeForm));
+        return play.mvc.Controller.ok(views.html.users.index.render(personalInformationForm, generalUserInformationForm));
     }
 
     public Result save(){
 
         Form<PersonalInformation> personalInformationFilledForm = personalInformationForm.bindFromRequest();
         Form<GeneralUserInformation> generalUserInformationFilledForm = generalUserInformationForm.bindFromRequest();
-        Form<ActivityType> activityTypeFilledForm = activityTypeForm.bindFromRequest();
+//        Form<ActivityType> activityTypeFilledForm = activityTypeForm.bindFromRequest();
 
         PersonalInformation personalInformation = personalInformationFilledForm.get();
         GeneralUserInformation generalUserInformation = generalUserInformationFilledForm.get();
@@ -56,13 +56,13 @@ public class UsersController {
         user.setUserInformation(generalUserInformation);
         usersService.persist(user);
 
-        List<String> activitiesOfInterest = activitiesType(activityTypeFilledForm.get().getActivityType());
-        for(String s : activitiesOfInterest){
-            ActivityType at = new ActivityType();
-            at.setGeneralUserInformation(generalUserInformation);
-            at.setActivityType(s);
-            activityTypeService.persist(at);
-        }
+//        List<String> activitiesOfInterest = activitiesType(activityTypeFilledForm.get().getActivityType());
+//        for(String s : activitiesOfInterest){
+//            ActivityType at = new ActivityType();
+//            at.setGeneralUserInformation(generalUserInformation);
+//            at.setActivityType(s);
+//            activityTypeService.persist(at);
+//        }
 
 //        AuthenticationProvider authenticationProvider = new AuthenticationProvider();
 //        authenticationProvider.setProviderKey(createRandom());

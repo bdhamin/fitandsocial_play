@@ -52,6 +52,23 @@ public final class DateAndTimePrintFormatter {
         return 1;
     }
 
+    public static long getCurrentDateAsLong(){
+        Date date = new Date();
+        String pattern = "dd-MM-yyyy";
+        DateFormat df = new SimpleDateFormat(pattern);
+        Date d = null;
+        String date1 = df.format(date);
+        try {
+            d = df.parse(date1);
+            return d.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date.getTime();
+    }
+
+
+
 
 
 

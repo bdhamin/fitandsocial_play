@@ -31,14 +31,14 @@ public class ParticipantController {
 
         List<Activity> activities = new ArrayList<>();
 
-        Users user = usersService.getById(231L);
+        Users user = usersService.getById(324L);
 
-        Activity activity1 = activityService.getById(237L);
-        Activity activity2 = activityService.getById(240L);
+        Activity activity1 = activityService.getById(333L);
+//        Activity activity2 = activityService.getById(240L);
 //        Activity activity3 = activityService.getById(132L);
 
         activities.add(activity1);
-        activities.add(activity2);
+//        activities.add(activity2);
 //        activities.add(activity3);
 
 
@@ -51,9 +51,4 @@ public class ParticipantController {
 
         return play.mvc.Controller.ok();
     }
-
-
-
-
-
 }

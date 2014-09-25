@@ -29,6 +29,8 @@ public class Users{
     private List<Activity> activities;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<ActivityParticipant> activityParticipants;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserWarning> userWarnings;
 
     public Long getId() {
         return id;
@@ -100,5 +102,13 @@ public class Users{
 
     public void setActivityParticipants(List<ActivityParticipant> activityParticipants) {
         this.activityParticipants = activityParticipants;
+    }
+
+    public List<UserWarning> getUserWarnings() {
+        return userWarnings;
+    }
+
+    public void setUserWarnings(List<UserWarning> userWarnings) {
+        this.userWarnings = userWarnings;
     }
 }

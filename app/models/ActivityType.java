@@ -5,14 +5,14 @@ import javax.persistence.*;
 /**
  * Created by mint on 1-9-14.
  */
-@Entity
+//@Entity
 public class ActivityType{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private GeneralUserInformation generalUserInformation;
+//    @ManyToOne
+//    private GeneralUserInformation generalUserInformation;
     private String activityType;
 
     public Long getId() {
@@ -22,14 +22,14 @@ public class ActivityType{
     public void setId(Long id) {
         this.id = id;
     }
-
-    public GeneralUserInformation getGeneralUserInformation() {
-        return generalUserInformation;
-    }
-
-    public void setGeneralUserInformation(GeneralUserInformation generalUserInformation) {
-        this.generalUserInformation = generalUserInformation;
-    }
+//
+//    public GeneralUserInformation getGeneralUserInformation() {
+//        return generalUserInformation;
+//    }
+//
+//    public void setGeneralUserInformation(GeneralUserInformation generalUserInformation) {
+//        this.generalUserInformation = generalUserInformation;
+//    }
 
     public String getActivityType() {
         return activityType;

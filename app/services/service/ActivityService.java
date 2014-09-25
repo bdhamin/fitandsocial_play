@@ -14,4 +14,11 @@ public interface ActivityService extends DefaultService<Long, Activity>{
 
     public List<Activity> activitiesList(String activityType, int distance, int durationMin, int durationMax, int radiusMin, int radiusMax, long startDate, long time);
 
+    public List<Activity> getUserUpcomingActivities(long userId);
+
+    public Activity getLastActivity(long userId);
+
+
+
+
 }

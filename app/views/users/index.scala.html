@@ -1,4 +1,4 @@
-@(personalInformation: Form[PersonalInformation], generalUserInformation: Form[GeneralUserInformation], activityType: Form[ActivityType])
+@(personalInformation: Form[PersonalInformation], generalUserInformation: Form[GeneralUserInformation])
 @import helper._
 @import helper.twitterBootstrap._
 
@@ -11,7 +11,7 @@
         @inputText(personalInformation("age"), '_label -> "Age", 'style -> "width: 712px;", 'maxLength -> "20")
         @inputText(personalInformation("gender"), '_label -> "Gender", 'style -> "width: 712px;", 'maxLength -> "50")
         @inputText(generalUserInformation("nickname"), '_label -> "Nickname", 'style -> "width: 712px;", 'maxLength -> "50")
-        @inputText(activityType("activityType"), '_label -> "Activity Type", 'style -> "width: 712px;", 'maxLength -> "150")
+        @inputText(generalUserInformation("activitiesOfInterest"), '_label -> "Activity Type", 'style -> "width: 712px;", 'maxLength -> "150")
         @inputText(generalUserInformation("details"), '_label -> "Details", 'style -> "width: 712px;", 'maxLength -> "250")
 
         <input type="submit" value="Create" class="btn btn-primary">

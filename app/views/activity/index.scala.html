@@ -7,7 +7,8 @@
     @form(routes.ActivityController.create()){
         @inputText(activityInformation("title"), '_label -> "Title", 'style -> "width: 712px;", 'maxLength -> "150")
         @inputText(activityInformation("type"), '_label -> "Type", 'style -> "width: 712px;", 'maxLength -> "150")
-        @inputText(activityInformation("duration"), '_label -> "Duration", 'style -> "width: 712px;", 'maxLength -> "150")
+        @inputText(activityInformation("durationMin"), '_label -> "Duration Min", 'style -> "width: 712px;", 'maxLength -> "150")
+        @inputText(activityInformation("durationMax"), '_label -> "Duration Max", 'style -> "width: 712px;", 'maxLength -> "150")
         @inputText(activityInformation("activityDate"), '_label -> "Activity Date", 'style -> "width: 712px;", 'maxLength -> "150")
         @inputText(activityInformation("activityTime"), '_label -> "Activity Time", 'style -> "width: 712px;", 'maxLength -> "150")
         @inputText(activityInformation("distance"), '_label -> "Distance", 'style -> "width: 712px;", 'maxLength -> "20")

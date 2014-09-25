@@ -8,6 +8,8 @@ import play.data.Form;
 import play.mvc.BodyParser;
 import play.mvc.Result;
 import services.service.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +27,8 @@ public class ActivityController {
     ActivityInformationService activityInformationService;
     @Autowired
     ActivityLocationService activityLocationService;
+    @Autowired
+    ActivityParticipantService activityParticipantService;
 
     private final Form<ActivityInformation> activityInformationForm = new Form<>(ActivityInformation.class);
     private final Form<ActivityLocation> activityLocationForm = new Form<>(ActivityLocation.class);
@@ -39,14 +43,20 @@ public class ActivityController {
         Activity activity = new Activity();
         ActivityInformation activityInformation = filledActivityInformation.get();
         ActivityLocation activityLocation = filledActivityLocation.get();
-        Users user = usersService.getById(222L);
+        List<Activity> activities = new ArrayList<>();
+        Users user = usersService.getById(321L);
         if(user != null){
             activity.setUser(user);
             activityInformation.setActivity(activity);
             activityLocation.setActivity(activity);
             activity.setActivityInformation(activityInformation);
             activity.setActivityLocation(activityLocation);
+            activities.add(activity);
+            ActivityParticipant activityParticipant = new ActivityParticipant();
+            activityParticipant.setUser(user);
+            activityParticipant.setActivities(activities);
             activityService.persist(activity);
+            activityParticipantService.merge(activityParticipant);
         }
         return play.mvc.Controller.ok();
     }
@@ -62,7 +72,7 @@ public class ActivityController {
 
 
 
-
+//341, 344
 
 
 }

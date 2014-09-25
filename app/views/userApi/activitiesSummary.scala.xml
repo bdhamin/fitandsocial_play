@@ -1,10 +1,10 @@
-@(total: Integer, created: Integer, participated: Integer)<?xml version="1.0" encoding="utf-8"?>
+@(total: Integer, created: Integer, participated: Integer, cancelled: Integer)<?xml version="1.0" encoding="utf-8"?>
 
 <activities>
     <activity>
         <total>@total</total>
         <created>@created</created>
         <participated>@participated</participated>
-        <cancelled>0</cancelled>
+        <cancelled>@cancelled</cancelled>
     </activity>
 </activities>

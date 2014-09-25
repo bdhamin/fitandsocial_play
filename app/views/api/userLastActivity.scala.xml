@@ -1,6 +1,5 @@
-@(activityList: List[Activity])<?xml version="1.0" encoding="utf-8"?>
-
-<activities>@for(activity <- activityList){
+@(activity: Activity)<?xml version="1.0" encoding="utf-8"?>
+<activities>
     <activity>
         <id>@activity.getId()</id>
         <title>@activity.getActivityInformation().getTitle()</title>
@@ -28,5 +27,4 @@
             </member>
         </members>
     </activity>
-  }
 </activities>

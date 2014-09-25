@@ -1,0 +1,12 @@
+@(user: Users)<?xml version="1.0" encoding="utf-8"?>
+<users>
+    <user>
+        <name>@user.getPersonalInformation().getFirstName() @user.getPersonalInformation().getLastName()</name>
+        <age>@user.getPersonalInformation().getAge()</age>
+        <gender>@user.getPersonalInformation().getGender()</gender>
+        <email>@user.getPersonalInformation().getUserEmail()</email>
+        <nickname>@user.getUserInformation().getNickname()</nickname>
+        <activities>@user.getUserInformation().getActivitiesOfInterest()</activities>
+        <about>@user.getUserInformation().getDetails()</about>
+    </user>
+</users>

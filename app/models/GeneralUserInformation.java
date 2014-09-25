@@ -13,12 +13,13 @@ public class GeneralUserInformation{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String details;
-    @OneToMany
-    private List<ActivityType> activityTypes;
+//    @OneToMany
+//    private List<ActivityType> activityTypes;
     private byte[] profilePicture;
     private String nickname;
     @OneToOne(mappedBy = "userInformation")
     private Users user;
+    private String activitiesOfInterest;
 
 
     public Long getId() {
@@ -37,13 +38,13 @@ public class GeneralUserInformation{
         this.details = details;
     }
 
-    public List<ActivityType> getActivityTypes() {
-        return activityTypes;
-    }
-
-    public void setActivityTypes(List<ActivityType> activityTypes) {
-        this.activityTypes = activityTypes;
-    }
+//    public List<ActivityType> getActivityTypes() {
+//        return activityTypes;
+//    }
+//
+//    public void setActivityTypes(List<ActivityType> activityTypes) {
+//        this.activityTypes = activityTypes;
+//    }
 
     public byte[] getProfilePicture() {
         return profilePicture;
@@ -67,5 +68,13 @@ public class GeneralUserInformation{
 
     public void setUser(Users user) {
         this.user = user;
+    }
+
+    public String getActivitiesOfInterest() {
+        return activitiesOfInterest;
+    }
+
+    public void setActivitiesOfInterest(String activitiesOfInterest) {
+        this.activitiesOfInterest = activitiesOfInterest;
     }
 }

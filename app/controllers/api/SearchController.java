@@ -36,8 +36,6 @@ public class SearchController {
         long activityStartDate = DateAndTimePrintFormatter.convertStringToTimeStamp(startDate);
         long activityStartTime = DateAndTimePrintFormatter.convertTimeToLong(time);
         List<Activity> activities = activityService.activitiesList(activityType, distance, durationMin, durationMax, radiusMin, radiusMax, activityStartDate, activityStartTime);
-
-        System.out.println(activityType + " " + distance + " " + durationMin + " " + durationMax + " " + radiusMin + " " + radiusMax + " " + startDate + " " + time);
         return play.mvc.Controller.ok(views.xml.api.searchResults.render(activities));
 
     }

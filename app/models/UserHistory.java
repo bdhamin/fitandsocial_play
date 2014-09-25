@@ -26,7 +26,6 @@ public class UserHistory{
     @OneToOne(mappedBy = "userHistory")
     private Users user;
 
-
     public UserHistory(){
         this.setActiveSince(new DateTime());
         this.setLastActive(new DateTime());
@@ -35,7 +34,6 @@ public class UserHistory{
         this.setTotalCancelledActivities(0);
         this.setTotalWarnings(0);
     }
-
 
     public Long getId() {
         return id;

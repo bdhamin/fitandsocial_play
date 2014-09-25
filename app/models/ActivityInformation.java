@@ -19,7 +19,8 @@ public class ActivityInformation{
     private Long id;
     private String title;
     private String type;
-    private int duration;
+    private int durationMin;
+    private int durationMax;
     private int distance;
     @Transient
     private String activityDateString;
@@ -61,14 +62,6 @@ public class ActivityInformation{
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
     }
 
     public int getDistance() {
@@ -121,4 +114,19 @@ public class ActivityInformation{
         return activityTimeString;
     }
 
+    public int getDurationMin() {
+        return durationMin;
+    }
+
+    public void setDurationMin(int durationMin) {
+        this.durationMin = durationMin;
+    }
+
+    public int getDurationMax() {
+        return durationMax;
+    }
+
+    public void setDurationMax(int durationMax) {
+        this.durationMax = durationMax;
+    }
 }

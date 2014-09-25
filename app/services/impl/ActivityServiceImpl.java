@@ -5,10 +5,12 @@ import models.Activity;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import services.service.ActivityService;
+import utils.DateAndTimePrintFormatter;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,9 +37,14 @@ public class ActivityServiceImpl extends DefaultServiceImpl<Long, Activity> impl
     @Override
     public List<Activity> activitiesList(String activityType, int distance, int durationMin, int durationMax, int radiusMin, int radiusMax, long startDate, long time) {
 
-        String hql = "SELECT a FROM Activity a WHERE a.activityInformation.type = :activityType AND a.activityInformation.distance = :distance" +
-                " AND (a.activityInformation.duration >= :durationMin AND a.activityInformation.duration <= :durationMax)" +
-                " AND a.activityInformation.activityDate = :startDate AND a.activityInformation.activityTime = :startTime";
+//        String hql = "SELECT a FROM Activity a WHERE a.activityInformation.type = :activityType AND a.activityInformation.distance = :distance" +
+//                " AND (a.activityInformation.durationMin >= :durationMin AND a.activityInformation.durationMax <= :durationMax)" +
+//                " AND a.activityInformation.activityDate = :startDate AND a.activityInformation.activityTime = :startTime";
+
+            String hql = "SELECT a FROM Activity a WHERE a.activityInformation.type = :activityType AND a.activityInformation.distance = :distance" +
+            " AND( (a.activityInformation.durationMin >= :durationMin AND a.activityInformation.durationMax <= :durationMax) " +
+            " OR a.activityInformation.durationMin = :durationMax OR a.activityInformation.durationMax = :durationMin)" +
+            " AND a.activityInformation.activityDate = :startDate AND a.activityInformation.activityTime = :startTime";
 
         Query query = em.createQuery(hql);
         query.setParameter("activityType", activityType);
@@ -49,4 +56,36 @@ public class ActivityServiceImpl extends DefaultServiceImpl<Long, Activity> impl
 
         return (List<Activity>) query.getResultList();
     }
+
+    @Override
+    public List<Activity> getUserUpcomingActivities(long userId) {
+        long currentDate = DateAndTimePrintFormatter.getCurrentDateAsLong();
+
+        String hql = "SELECT a FROM Activity a JOIN a.activityParticipants ap WHERE a.activityInformation.activityDate >= :currentDate AND ap.user.id=:userId AND ap.isParticipationActive=:isActive";
+        Query query = em.createQuery(hql);
+
+//        String hql = "SELECT a FROM Activity a WHERE a.activityInformation.activityDate >= :currentDate AND a.user.id =:userId";
+//        Query query = em.createQuery(hql);
+        query.setParameter("userId", userId);
+        query.setParameter("currentDate", currentDate);
+        query.setParameter("isActive", true);
+        return (List<Activity>) query.getResultList();
+    }
+
+    @Override
+    public Activity getLastActivity(long userId) {
+
+        String hql = "SELECT a FROM Activity a JOIN a.activityParticipants ac WHERE ac.user.id = :userId";
+
+        Query query = em.createQuery(hql);
+        query.setParameter("userId", userId);
+        List<Activity> activityList =  (List<Activity>) query.getResultList();
+        if(activityList.size() > 0){
+            return activityList.get(0);
+        }else{
+            return null;
+        }
+    }
+
+
 }

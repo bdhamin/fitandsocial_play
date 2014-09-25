@@ -11,4 +11,8 @@ public interface ActivityParticipantService extends DefaultService<Long, Activit
 
     public List<ActivityParticipant> getAllUserActivityParticipation(long id);
 
+    public ActivityParticipant findActivityParticipation(long userId, long activityId);
+
+    public List<ActivityParticipant> getUserCancelledActivitiesTotal(long userId);
+
 }

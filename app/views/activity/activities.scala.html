@@ -21,7 +21,10 @@
                     Type
                 </th>
                 <th>
-                    Duration
+                    Duration (Min)
+                </th>
+                <th>
+                    Duration (Max)
                 </th>
                 <th>
                     Distance
@@ -50,7 +53,10 @@
                          @activities.getActivityInformation().getType()
                     </td>
                     <td>
-                         @activities.getActivityInformation().getDuration
+                         @activities.getActivityInformation().getDurationMin()
+                    </td>
+                    <td>
+                        @activities.getActivityInformation().getDurationMax()
                     </td>
                     <td>
                         @activities.getActivityInformation().getDistance()
