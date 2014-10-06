@@ -11,17 +11,17 @@ import javax.persistence.OneToOne;
 public class AuthenticationProvider {
 
     @Id
-    private Long providerKey;
+    private String providerKey;
     @OneToOne(mappedBy = "authenticationProvider")
     private Users user;
     //Should this be change to an enum list?
     private String providerType;
 
-    public Long getProviderKey() {
+    public String getProviderKey() {
         return providerKey;
     }
 
-    public void setProviderKey(Long providerKey) {
+    public void setProviderKey(String providerKey) {
         this.providerKey = providerKey;
     }
 

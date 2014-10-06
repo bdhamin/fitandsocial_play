@@ -42,10 +42,14 @@ public class ApiActivityController {
 
     @BodyParser.Of(BodyParser.Json.class)
     public Result participate(){
-
         try {
+            //TODO: check for null values
             JsonNode jsonNode = request().body().asJson();
-            long userId = jsonNode.findPath(KEY_USER_ID).longValue();
+            String authenticationKey = jsonNode.findPath(KEY_USER_ID).textValue();
+
+            Users users = usersService.getUserByAuthenticationProvider(authenticationKey);
+
+            long userId = users.getId();
             long activityId = jsonNode.findPath(KEY_ACTIVITY_ID).longValue();
 
             if (activityId != 0 && activityId > 0 && userId != 0 && userId > 0) {
@@ -78,14 +82,16 @@ public class ApiActivityController {
     @BodyParser.Of(BodyParser.Json.class)
     public Result createActivityFromJson(){
         try {
+            System.out.println("Create Activity Here!!!!!");
             JsonNode json = request().body().asJson();
             Gson gson = new Gson();
             ActivityInformation activityInformation = gson.fromJson(json.toString(), ActivityInformation.class);
             Activity activity = new Activity();
             ActivityLocation activityLocation = gson.fromJson(json.toString(), ActivityLocation.class);
-            long userId = json.findPath("user").longValue();
-            if (userId != 0 && userId > 0) {
-                Users user = usersService.getById(userId);
+            String authenticationKey = json.findPath("user").textValue();
+            Users user = usersService.getUserByAuthenticationProvider(authenticationKey);
+            System.out.println("Create Activity Here!!!!! " + user.getId());
+            if (user.getId() != null && user.getId() > 0) {
                 if (user != null) {
                     List<Activity> activities = new ArrayList<>();
                     activity.setUser(user);
@@ -109,15 +115,15 @@ public class ApiActivityController {
     }
 
     @BodyParser.Of(BodyParser.Xml.class)
-    public Result getUpcomingActivities(long id){
-        List<Activity> activities = activityService.getUserUpcomingActivities(id);
+    public Result getUpcomingActivities(String authenticationProviderKey){
+        List<Activity> activities = activityService.getUserUpcomingActivities(authenticationProviderKey);
         return ok(views.xml.userApi.activityxml.render(activities));
     }
 
 
     @BodyParser.Of(BodyParser.Xml.class)
-    public Result getUserLastActivity(long id){
-        Activity activity = activityService.getLastActivity(id);
+    public Result getUserLastActivity(String authenticationProviderKey){
+        Activity activity = activityService.getLastActivity(authenticationProviderKey);
         if(activity != null){
             return ok(views.xml.api.userLastActivity.render(activity));
         }else{
@@ -132,10 +138,10 @@ public class ApiActivityController {
         try{
             JsonNode jsonNode = request().body().asJson();
             long activityId = jsonNode.findPath("activityId").longValue();
-            long userId = jsonNode.findPath("userId").longValue();
-
-            if(activityId != 0 && activityId > 0 && userId != 0 && userId > 0){
-                ActivityParticipant participant = activityParticipantService.findActivityParticipation(userId, activityId);
+            String authenticationProviderKey = jsonNode.findPath("userId").textValue();
+            Users user = usersService.getUserByAuthenticationProvider(authenticationProviderKey);
+            if(activityId != 0 && activityId > 0 && user.getId() != null && user.getId() > 0){
+                ActivityParticipant participant = activityParticipantService.findActivityParticipation(user.getId(), activityId);
                 if(participant != null){
                     participant.setParticipationActive(false);
                     participant.setCancellationDate(new Date().getTime());

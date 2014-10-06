@@ -39,27 +39,32 @@ public class UserApiController{
     }
 
     @BodyParser.Of(BodyParser.Xml.class)
-    public Result getUserActivitiesSummary(Long id){
-        List<Activity> activities = activityService.findActivitiesByUserId(id);
-        List<ActivityParticipant> activityParticipants = activityParticipantService.getAllUserActivityParticipation(id);
-        List<ActivityParticipant> cancelledActivities = activityParticipantService.getUserCancelledActivitiesTotal(id);
-
-
+    public Result getUserActivitiesSummary(String id){
 
         int total = 0;
         int created = 0;
         int participated = 0;
         int cancelled = 0;
 
-        if(activities.size() > 0){
-            created = activities.size();
-        }
-        if(activityParticipants.size() > 0){
-            participated = activityParticipants.size();
-        }
+        if(id != null && !id.trim().isEmpty()){
 
-        if(cancelledActivities.size() > 0){
-            cancelled = cancelled+cancelledActivities.size();
+            Users user = usersService.getUserByAuthenticationProvider(id);
+            if(user != null){
+                List<Activity> activities = activityService.findActivitiesByUserId(user.getId());
+                List<ActivityParticipant> activityParticipants = activityParticipantService.getAllUserActivityParticipation(user.getId());
+                List<ActivityParticipant> cancelledActivities = activityParticipantService.getUserCancelledActivitiesTotal(user.getId());
+
+                if(activities.size() > 0){
+                    created = activities.size();
+                }
+                if(activityParticipants.size() > 0){
+                    participated = activityParticipants.size();
+                }
+
+                if(cancelledActivities.size() > 0){
+                    cancelled = cancelled+cancelledActivities.size();
+                }
+            }
         }
 
         total = created + participated + cancelled;
@@ -69,9 +74,11 @@ public class UserApiController{
 
 
     @BodyParser.Of(BodyParser.Xml.class)
-    public Result loadUserProfile(long uId){
-        if(uId != 0 && uId > 0){
-            Users user = usersService.getById(uId);
+    public Result loadUserProfile(String uId){
+
+        if(uId != null && !uId.trim().isEmpty()){
+            Users user = usersService.getUserByAuthenticationProvider(uId);
+
             if(user != null){
                 return ok(views.xml.api.userProfile.render(user));
             }else{

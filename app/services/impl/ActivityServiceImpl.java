@@ -2,6 +2,7 @@ package services.impl;
 
 import javassist.expr.Cast;
 import models.Activity;
+import models.Users;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 import services.service.ActivityService;
@@ -58,34 +59,53 @@ public class ActivityServiceImpl extends DefaultServiceImpl<Long, Activity> impl
     }
 
     @Override
-    public List<Activity> getUserUpcomingActivities(long userId) {
+    public List<Activity> getUserUpcomingActivities(String authenticationProviderId) {
         long currentDate = DateAndTimePrintFormatter.getCurrentDateAsLong();
 
-        String hql = "SELECT a FROM Activity a JOIN a.activityParticipants ap WHERE a.activityInformation.activityDate >= :currentDate AND ap.user.id=:userId AND ap.isParticipationActive=:isActive";
-        Query query = em.createQuery(hql);
+        Users user = getUserByAuthenticationProviderId(authenticationProviderId);
 
-//        String hql = "SELECT a FROM Activity a WHERE a.activityInformation.activityDate >= :currentDate AND a.user.id =:userId";
-//        Query query = em.createQuery(hql);
+        if(user != null){
+        long userId = user.getId();
+        String hql = "SELECT a FROM Activity a JOIN a.activityParticipants ap WHERE a.activityInformation.activityDate >= :currentDate " +
+                     "AND ap.user.id=:userId AND ap.isParticipationActive=:isActive";
+
+        Query query = em.createQuery(hql);
         query.setParameter("userId", userId);
         query.setParameter("currentDate", currentDate);
         query.setParameter("isActive", true);
-        return (List<Activity>) query.getResultList();
-    }
-
-    @Override
-    public Activity getLastActivity(long userId) {
-
-        String hql = "SELECT a FROM Activity a JOIN a.activityParticipants ac WHERE ac.user.id = :userId";
-
-        Query query = em.createQuery(hql);
-        query.setParameter("userId", userId);
-        List<Activity> activityList =  (List<Activity>) query.getResultList();
-        if(activityList.size() > 0){
-            return activityList.get(0);
+            return (List<Activity>) query.getResultList();
         }else{
             return null;
         }
+
     }
 
+    private Users getUserByAuthenticationProviderId(String authenticationKey) {
 
+        String hql = "SELECT u FROM Users u WHERE u.authenticationProvider.providerKey=:authenticationKey";
+        Query query = em.createQuery(hql);
+        query.setParameter("authenticationKey", authenticationKey);
+        return (Users)query.getResultList().get(0);
+    }
+
+    @Override
+    public Activity getLastActivity(String authenticationProviderKey) {
+
+        Users user = getUserByAuthenticationProviderId(authenticationProviderKey);
+        if(user != null){
+            long userId = user.getId();
+            String hql = "SELECT a FROM Activity a JOIN a.activityParticipants ac WHERE ac.user.id = :userId";
+
+            Query query = em.createQuery(hql);
+            query.setParameter("userId", userId);
+            List<Activity> activityList =  (List<Activity>) query.getResultList();
+            if(activityList.size() > 0){
+                return activityList.get(0);
+            }else{
+                return null;
+            }
+        }else {
+            return null;
+        }
+    }
 }

@@ -1,5 +1,7 @@
 package services.service;
 
+import models.Users;
+
 import java.util.List;
 
 /**
