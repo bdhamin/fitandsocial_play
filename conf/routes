@@ -22,8 +22,17 @@ POST        /participationRequest             @controllers.api.ApiActivityContro
 POST        /createActivity                   @controllers.api.ApiActivityController.createActivityFromJson
 GET         /upcomingActivities               @controllers.api.ApiActivityController.getUpcomingActivities(id: String)
 GET         /lastActivity                     @controllers.api.ApiActivityController.getUserLastActivity(id: String)
-POST         /cancelParticipation              @controllers.api.ApiActivityController.cancelParticipation()
+POST        /cancelParticipation              @controllers.api.ApiActivityController.cancelParticipation()
 GET         /userProfile/:id                  @controllers.api.UserApiController.loadUserProfile(id: String)
 POST        /register                         @controllers.api.CreateUser.createAccount
+POST        /deviceRegistrationId/:authenticationID/:deviceRegistrationID @controllers.api.GCMDeviceRegistration.registerDevice(authenticationID: String, deviceRegistrationID: String)
+POST        /updateProfile                    @controllers.api.UserApiController.updateUserProfile(authenticationID: String)
+
+
+GET     /logout                     com.feth.play.module.pa.controllers.Authenticate.logout
+GET     /authenticate/:provider     com.feth.play.module.pa.controllers.Authenticate.authenticate(provider: String)
+GET     /authenticate/:provider/denied     controllers.Application.oAuthDenied(provider: String)
+
+
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                     controllers.Assets.at(path="/public", file)

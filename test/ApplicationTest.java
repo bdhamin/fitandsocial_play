@@ -2,7 +2,7 @@
 //import org.junit.Test;
 //import play.data.Form;
 //import play.libs.WS;
-//import play.mvc.Content;
+//import play.mvc.GCMContent;
 //import play.mvc.Result;
 //import play.test.FakeRequest;
 //
@@ -20,7 +20,7 @@
 //        running(fakeApplication(), new Runnable() {
 //            public void run() {
 //                Form<Bar> form = Form.form(Bar.class);
-//                Content html = views.html.index.render(form);
+//                GCMContent html = views.html.index.render(form);
 //                assertThat(contentType(html)).isEqualTo("text/html");
 //                assertThat(contentAsString(html)).contains("Welcome");
 //            }

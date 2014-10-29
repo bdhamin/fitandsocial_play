@@ -1,4 +1,4 @@
-@(user: Users)<?xml version="1.0" encoding="utf-8"?>
+@(user: Users, activeSince : String)<?xml version="1.0" encoding="utf-8"?>
 <users>
     <user>
         <name>@user.getPersonalInformation().getFirstName() @user.getPersonalInformation().getLastName()</name>
@@ -8,5 +8,6 @@
         <nickname>@user.getUserInformation().getNickname()</nickname>
         <activities>@user.getUserInformation().getActivitiesOfInterest()</activities>
         <about>@user.getUserInformation().getDetails()</about>
+        <active_since>@activeSince</active_since>
     </user>
 </users>

@@ -21,7 +21,13 @@ public class Activity{
     private ActivityInformation activityInformation;
     @OneToOne(cascade = CascadeType.ALL)
     private ActivityLocation activityLocation;
-    @ManyToMany(mappedBy="activities", cascade = CascadeType.REMOVE)
+    /**
+     * Used the fetch type used here is not the recommended when loading depth dependencies.
+     * However here we always need to access depth dependencies (User, User information) therefore
+     * this option is ok. A better solution would be lazy loading with an option to for eager loading
+     * when needed, but again this is not an option "right now".
+     */
+    @ManyToMany(mappedBy="activities", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<ActivityParticipant> activityParticipants;
     private String activityStatus;
     @ManyToOne

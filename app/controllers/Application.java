@@ -9,7 +9,11 @@ import play.mvc.Result;
 import services.service.RegistrationService;
 import views.html.index;
 
+import static play.mvc.Controller.flash;
 import static play.mvc.Results.ok;
+import static play.mvc.Results.redirect;
+
+
 
 @org.springframework.stereotype.Controller
 public class Application {
@@ -54,11 +58,18 @@ public class Application {
         Form<Registration> form = Form.form(Registration.class).bindFromRequest();
         Registration registration = form.get();
         registrationService.persist(registration);
-        return play.mvc.Controller.redirect(controllers.routes.Application.index());
+        return redirect(controllers.routes.Application.index());
     }
 
     public Result listRegistration() {
         return play.mvc.Controller.ok(Json.toJson(registrationService.getAll()));
+    }
+
+
+    public static Result oAuthDenied(final String providerKey) {
+        flash("Error",
+                "You need to accept the OAuth connection in order to use this website!");
+        return redirect(routes.Application.index());
     }
     
 }

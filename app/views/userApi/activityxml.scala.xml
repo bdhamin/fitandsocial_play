@@ -9,24 +9,18 @@
         <duration>@activity.getActivityInformation().getDurationMin()-@activity.getActivityInformation().getDurationMax() Min</duration>
         <date>@activity.getActivityInformation().getActivityDateString()</date>
         <time>@activity.getActivityInformation().getActivityTimeString()</time>
-        <members_total>5</members_total>
+        <members_total>@activity.getActivityParticipants().size()</members_total>
+        @if(activity.getActivityParticipants().size() != null && activity.getActivityParticipants().size() > 0){
+        @for(participant <- activity.getActivityParticipants()){
         <members>
             <member>
                 <id>52</id>
-                <name>Hardcore</name>
-                <pictureURL>some_url</pictureURL>
-            </member>
-            <member>
-                <id>52</id>
-                <name>Hardcore 2</name>
-                <pictureURL>some_url</pictureURL>
-            </member>
-            <member>
-                <id>52</id>
-                <name>Hardcore 3</name>
+                <name>@participant.getUser().getUserInformation().getNickname()</name>
                 <pictureURL>some_url</pictureURL>
             </member>
         </members>
+        }
+     }
     </activity>
   }
 </activities>

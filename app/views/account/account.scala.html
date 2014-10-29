@@ -1,0 +1,10 @@
+@import com.feth.play.module.pa.views.html._
+
+
+@forProviders() { p =>
+<a href="@p.getUrl()">@p.getKey()</a>
+}
+
+
+
+<a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout">Logout</a>

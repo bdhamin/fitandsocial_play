@@ -37,15 +37,12 @@ public class ActivityServiceImpl extends DefaultServiceImpl<Long, Activity> impl
 
     @Override
     public List<Activity> activitiesList(String activityType, int distance, int durationMin, int durationMax, int radiusMin, int radiusMax, long startDate, long time) {
-
-//        String hql = "SELECT a FROM Activity a WHERE a.activityInformation.type = :activityType AND a.activityInformation.distance = :distance" +
-//                " AND (a.activityInformation.durationMin >= :durationMin AND a.activityInformation.durationMax <= :durationMax)" +
-//                " AND a.activityInformation.activityDate = :startDate AND a.activityInformation.activityTime = :startTime";
+        long currentDate = DateAndTimePrintFormatter.getCurrentDateAsLong();
 
             String hql = "SELECT a FROM Activity a WHERE a.activityInformation.type = :activityType AND a.activityInformation.distance = :distance" +
             " AND( (a.activityInformation.durationMin >= :durationMin AND a.activityInformation.durationMax <= :durationMax) " +
             " OR a.activityInformation.durationMin = :durationMax OR a.activityInformation.durationMax = :durationMin)" +
-            " AND a.activityInformation.activityDate = :startDate AND a.activityInformation.activityTime = :startTime";
+            " AND a.activityInformation.activityDate = :startDate AND a.activityInformation.activityDate >= :currentDate AND a.activityInformation.activityTime = :startTime";
 
         Query query = em.createQuery(hql);
         query.setParameter("activityType", activityType);
@@ -53,9 +50,30 @@ public class ActivityServiceImpl extends DefaultServiceImpl<Long, Activity> impl
         query.setParameter("durationMin", durationMin);
         query.setParameter("durationMax", durationMax);
         query.setParameter("startDate", startDate);
+        query.setParameter("currentDate", currentDate);
         query.setParameter("startTime", time);
 
         return (List<Activity>) query.getResultList();
+    }
+
+    @Override
+    public List<Activity> activitiesList_withUser(String user, String activityType, int distance, int durationMin, int durationMax, int radiusMin, int radiusMax, long startDate, long time) {
+
+//        String hql = "SELECT a FROM Activity a WHERE a.activityInformation.type = :activityType AND a.activityInformation.distance = :distance" +
+//                " AND( (a.activityInformation.durationMin >= :durationMin AND a.activityInformation.durationMax <= :durationMax) " +
+//                " OR a.activityInformation.durationMin = :durationMax OR a.activityInformation.durationMax = :durationMin)" +
+//                " AND a.activityInformation.activityDate = :startDate AND a.activityInformation.activityTime = :startTime AND a.id " +
+//                " NOT IN (SELECT )" ;
+//
+//        Query query = em.createQuery(hql);
+//        query.setParameter("activityType", activityType);
+//        query.setParameter("distance", distance);
+//        query.setParameter("durationMin", durationMin);
+//        query.setParameter("durationMax", durationMax);
+//        query.setParameter("startDate", startDate);
+//        query.setParameter("startTime", time);
+
+        return null;
     }
 
     @Override
@@ -106,6 +124,21 @@ public class ActivityServiceImpl extends DefaultServiceImpl<Long, Activity> impl
             }
         }else {
             return null;
+        }
+    }
+
+    @Override
+    public long getActivityOwner(long activityId) {
+
+        String hql = "SELECT a FROM Activity a WHERE a.id = :activityId AND a.isOwner = :isOwner";
+        Query query = em.createQuery(hql);
+        query.setParameter("activityId", activityId);
+        query.setParameter("isOwner", true);
+        List<Activity> activityList =  (List<Activity>) query.getResultList();
+        if(activityList.size() > 0){
+            return activityList.get(0).getUser().getId();
+        }else{
+            return 0;
         }
     }
 }
