@@ -12,10 +12,10 @@ public class ActivityLocation{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private long startLocationLatitude;
-    private long startLocationMagnitude;
-    private long endLocationLatitude;
-    private long endLocationMagnitude;
+    private double startLocationLatitude;
+    private double startLocationMagnitude;
+    private double endLocationLatitude;
+    private double endLocationMagnitude;
     @OneToOne(mappedBy = "activityLocation")
     private Activity activity;
 
@@ -27,37 +27,7 @@ public class ActivityLocation{
         this.id = id;
     }
 
-    public long getStartLocationLatitude() {
-        return startLocationLatitude;
-    }
 
-    public void setStartLocationLatitude(long startLocationLatitude) {
-        this.startLocationLatitude = startLocationLatitude;
-    }
-
-    public long getStartLocationMagnitude() {
-        return startLocationMagnitude;
-    }
-
-    public void setStartLocationMagnitude(long startLocationMagnitude) {
-        this.startLocationMagnitude = startLocationMagnitude;
-    }
-
-    public long getEndLocationLatitude() {
-        return endLocationLatitude;
-    }
-
-    public void setEndLocationLatitude(long endLocationLatitude) {
-        this.endLocationLatitude = endLocationLatitude;
-    }
-
-    public long getEndLocationMagnitude() {
-        return endLocationMagnitude;
-    }
-
-    public void setEndLocationMagnitude(long endLocationMagnitude) {
-        this.endLocationMagnitude = endLocationMagnitude;
-    }
 
     public Activity getActivity() {
         return activity;
@@ -65,5 +35,37 @@ public class ActivityLocation{
 
     public void setActivity(Activity activity) {
         this.activity = activity;
+    }
+
+    public double getStartLocationLatitude() {
+        return startLocationLatitude;
+    }
+
+    public void setStartLocationLatitude(double startLocationLatitude) {
+        this.startLocationLatitude = startLocationLatitude;
+    }
+
+    public double getStartLocationMagnitude() {
+        return startLocationMagnitude;
+    }
+
+    public void setStartLocationMagnitude(double startLocationMagnitude) {
+        this.startLocationMagnitude = startLocationMagnitude;
+    }
+
+    public double getEndLocationLatitude() {
+        return endLocationLatitude;
+    }
+
+    public void setEndLocationLatitude(double endLocationLatitude) {
+        this.endLocationLatitude = endLocationLatitude;
+    }
+
+    public double getEndLocationMagnitude() {
+        return endLocationMagnitude;
+    }
+
+    public void setEndLocationMagnitude(double endLocationMagnitude) {
+        this.endLocationMagnitude = endLocationMagnitude;
     }
 }

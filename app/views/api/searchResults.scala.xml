@@ -9,7 +9,22 @@
         <duration>@activity.getActivityInformation().getDurationMin()-@activity.getActivityInformation().getDurationMax() Min</duration>
         <date>@activity.getActivityInformation().getActivityDateString()</date>
         <time>@activity.getActivityInformation().getActivityTimeString()</time>
-        <members_total>5</members_total>
+        <members_total>@activity.getActivityParticipants().size()</members_total>
+        <startLat>@activity.getActivityLocation().getStartLocationLatitude()</startLat>
+        <startLng>@activity.getActivityLocation().getStartLocationMagnitude()</startLng>
+        <endLat>@activity.getActivityLocation().getEndLocationLatitude()</endLat>
+        <endLng>@activity.getActivityLocation().getEndLocationMagnitude()</endLng>
+        @if(activity.getActivityParticipants().size() != null && activity.getActivityParticipants().size() > 0){
+        @for(participant <- activity.getActivityParticipants()){
+        <members>
+            <member>
+                <id>52</id>
+                <name>@participant.getUser().getUserInformation().getNickname()</name>
+                <pictureURL>some_url</pictureURL>
+            </member>
+        </members>
+        }
+        }
     </activity>
   }
 </activities>

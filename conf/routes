@@ -27,7 +27,7 @@ GET         /userProfile/:id                  @controllers.api.UserApiController
 POST        /register                         @controllers.api.CreateUser.createAccount
 POST        /deviceRegistrationId/:authenticationID/:deviceRegistrationID @controllers.api.GCMDeviceRegistration.registerDevice(authenticationID: String, deviceRegistrationID: String)
 POST        /updateProfile                    @controllers.api.UserApiController.updateUserProfile(authenticationID: String)
-
+GET         /canConnect                       @controllers.api.ConnectionTestController.canConnect
 
 GET     /logout                     com.feth.play.module.pa.controllers.Authenticate.logout
 GET     /authenticate/:provider     com.feth.play.module.pa.controllers.Authenticate.authenticate(provider: String)
