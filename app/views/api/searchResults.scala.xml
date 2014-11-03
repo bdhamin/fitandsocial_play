@@ -14,6 +14,10 @@
         <startLng>@activity.getActivityLocation().getStartLocationMagnitude()</startLng>
         <endLat>@activity.getActivityLocation().getEndLocationLatitude()</endLat>
         <endLng>@activity.getActivityLocation().getEndLocationMagnitude()</endLng>
+        <startStreet>@activity.getActivityLocation().getStartStreetName()</startStreet>
+        <endStreet>@activity.getActivityLocation().getEndStreetName()</endStreet>
+        <completeStartStreet>@activity.getActivityLocation().getCompleteStartAddress()</completeStartStreet>
+        <completeEndStreet>@activity.getActivityLocation().getCompleteEndAddress()</completeEndStreet>
         @if(activity.getActivityParticipants().size() != null && activity.getActivityParticipants().size() > 0){
         @for(participant <- activity.getActivityParticipants()){
         <members>
