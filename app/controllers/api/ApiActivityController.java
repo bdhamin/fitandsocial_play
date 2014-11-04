@@ -66,7 +66,7 @@ public class ApiActivityController {
 
                     if (user != null && activity != null) {
                         ActivityParticipant activityParticipant = new ActivityParticipant();
-                        List<Activity> activities = new ArrayList<>();
+                        List<Activity> activities = new ArrayList<Activity>();
                         activities.add(activity);
 
                         activityParticipant.setUser(user);
@@ -107,7 +107,7 @@ public class ApiActivityController {
             System.out.println("Create Activity Here!!!!! " + user.getId());
             if (user.getId() != null && user.getId() > 0) {
                 if (user != null) {
-                    List<Activity> activities = new ArrayList<>();
+                    List<Activity> activities = new ArrayList<Activity>();
                     activity.setUser(user);
                     activityInformation.setActivity(activity);
                     activityLocation.setActivity(activity);

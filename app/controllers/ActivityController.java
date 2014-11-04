@@ -30,8 +30,8 @@ public class ActivityController {
     @Autowired
     ActivityParticipantService activityParticipantService;
 
-    private final Form<ActivityInformation> activityInformationForm = new Form<>(ActivityInformation.class);
-    private final Form<ActivityLocation> activityLocationForm = new Form<>(ActivityLocation.class);
+    private final Form<ActivityInformation> activityInformationForm = new Form<ActivityInformation>(ActivityInformation.class);
+    private final Form<ActivityLocation> activityLocationForm = new Form<ActivityLocation>(ActivityLocation.class);
 
     public Result index(){
         return play.mvc.Controller.ok(views.html.activity.index.render(activityInformationForm, activityLocationForm));
@@ -43,7 +43,7 @@ public class ActivityController {
         Activity activity = new Activity();
         ActivityInformation activityInformation = filledActivityInformation.get();
         ActivityLocation activityLocation = filledActivityLocation.get();
-        List<Activity> activities = new ArrayList<>();
+        List<Activity> activities = new ArrayList<Activity>();
         Users user = usersService.getById(321L);
         if(user != null){
             activity.setUser(user);

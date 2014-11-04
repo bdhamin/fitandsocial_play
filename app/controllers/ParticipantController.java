@@ -29,7 +29,7 @@ public class ParticipantController {
 
     public Result addParticipant(){
 
-        List<Activity> activities = new ArrayList<>();
+        List<Activity> activities = new ArrayList<Activity>();
 
         Users user = usersService.getById(324L);
 
