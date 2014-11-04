@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/fitandsocial -Dhttp.port=${PORT} -Dplay.modules.evolutions.autoApply=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL}
+web: target/universal/stage/bin/play-java-spring -Dhttp.port=${PORT} -Dplay.modules.evolutions.autoApply=true -Ddb.default.driver=org.postgresql.Driver -Ddb.default.url=${DATABASE_URL}
