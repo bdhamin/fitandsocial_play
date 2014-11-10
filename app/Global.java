@@ -5,7 +5,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import play.GlobalSettings;
 import play.Application;
 import play.data.format.Formatters;
+import play.libs.F;
 import play.mvc.Call;
+import play.mvc.Http;
+import play.mvc.SimpleResult;
 import utils.AnnotationDateFormatter;
 import utils.AnnotationTimeFormatter;
 
@@ -13,6 +16,9 @@ import com.feth.play.module.pa.PlayAuthenticate;
 import com.feth.play.module.pa.PlayAuthenticate.Resolver;
 import com.feth.play.module.pa.exceptions.AccessDeniedException;
 import com.feth.play.module.pa.exceptions.AuthException;
+import views.html.error404;
+
+import static play.mvc.Results.notFound;
 
 public class Global extends GlobalSettings {
 
@@ -87,8 +93,11 @@ public class Global extends GlobalSettings {
         return ctx.getBean(clazz);
     }
 
-
-
-
+    @Override
+    public F.Promise<SimpleResult> onHandlerNotFound(Http.RequestHeader requestHeader) {
+        return F.Promise.<SimpleResult>pure(notFound(
+                error404.render(requestHeader.path())
+        ));
+    }
 
 }
